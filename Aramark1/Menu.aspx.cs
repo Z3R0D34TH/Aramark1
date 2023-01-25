@@ -28,11 +28,14 @@ namespace Aramark1
 
                 pizza.Pizza = "Margarita";
                 pizza.Price = "2.60£";
+                pizza.Date = DateTime.Now;
+                
             }
             else if (PizzaChoice.Items[1].Selected)
             {
                 pizza.Pizza = "Pepperoni";
                 pizza.Price = "2.80£";
+                pizza.Date = DateTime.Now;
             }
             db.Orders.Add(pizza);
             db.SaveChanges();
@@ -45,6 +48,11 @@ namespace Aramark1
         }
 
         protected void CheckoutButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
         {
 
         }

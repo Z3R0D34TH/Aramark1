@@ -18,5 +18,6 @@ namespace Aramark1
         public int CustomerID { get; set; }
         public string Pizza { get; set; }
         public string Price { get; set; }
+        public System.DateTime Date { get; set; }
     }
 }

@@ -7,6 +7,7 @@
       <Diagram DiagramId="67f716672cfb4eea87d60e0296703140" Name="Diagram1">
         <EntityTypeShape EntityType="AramarkDBModel.Order" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AramarkDBModel.User" Width="1.5" PointX="3.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AramarkDBModel.Pizza" Width="1.5" PointX="6.375" PointY="1.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

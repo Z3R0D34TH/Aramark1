@@ -27,5 +27,6 @@ namespace Aramark1
     
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Pizza> Pizzas { get; set; }
     }
 }

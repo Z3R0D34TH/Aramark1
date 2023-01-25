@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
         <div>
             Username:&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="UsernameBox" runat="server" MaxLength="20"></asp:TextBox>
+            <asp:TextBox ID="UsernameBox" runat="server" MaxLength="20" OnTextChanged="UsernameBox_TextChanged"></asp:TextBox>
             <br />
             Password:&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="PasswordBox" runat="server" OnTextChanged="PasswordBox_TextChanged"></asp:TextBox>
