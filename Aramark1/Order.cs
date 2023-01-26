@@ -19,5 +19,7 @@ namespace Aramark1
         public string Pizza { get; set; }
         public string Price { get; set; }
         public System.DateTime Date { get; set; }
+    
+        public virtual Users Users { get; set; }
     }
 }

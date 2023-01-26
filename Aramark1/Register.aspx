@@ -8,22 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            Enter your name:
-            <asp:TextBox ID="NameBox" runat="server" OnTextChanged="NameBox_TextChanged"></asp:TextBox>
-            <br />
-            Enter your second name: <asp:TextBox ID="SecondNameBox" runat="server"></asp:TextBox>
-            <br />
-            Enter email:<asp:TextBox ID="EmailBox" runat="server"></asp:TextBox>
-            <br />
-            Enter password:<asp:TextBox ID="PasswordBox" runat="server" TextMode="Password"></asp:TextBox>
-            <br />
-            Confirm password<asp:TextBox ID="ConfirmBox" runat="server" OnTextChanged="ConfirmBox_TextChanged" style="height: 22px" TextMode="Password"></asp:TextBox>
-            <br />
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
-            <br />
-            <asp:Label ID="ErrorsLabel" runat="server"></asp:Label>
-        </div>
+        <asp:Button ID="LogRed" runat="server" OnClick="LogRed_Click" Text="Login" />
     </form>
-</body>
+    </body>
 </html>

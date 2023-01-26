@@ -25,8 +25,7 @@ namespace Aramark1
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Pizza> Pizzas { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<Users> Users { get; set; }
     }
 }

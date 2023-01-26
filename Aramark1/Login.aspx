@@ -4,18 +4,14 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+
     <title></title>
 </head>
 <body>
     <form id="form1" runat="server">
         <div>
-            Username:&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="UsernameBox" runat="server" MaxLength="20" OnTextChanged="UsernameBox_TextChanged"></asp:TextBox>
-            <br />
-            Password:&nbsp;&nbsp;&nbsp;
-            <asp:TextBox ID="PasswordBox" runat="server" OnTextChanged="PasswordBox_TextChanged"></asp:TextBox>
-            <br />
-            <asp:Button ID="LoginButton" runat="server" OnClick="LoginButton_Click" Text="Login" />
+            <asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate" VisibleWhenLoggedIn="False" Height="177px" Width="319px">
+            </asp:Login>
         </div>
     </form>
 </body>

@@ -8,24 +8,26 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <asp:RadioButtonList ID="PizzaChoice" runat="server">
-                <asp:ListItem>Margarita - 2,60£</asp:ListItem>
-                <asp:ListItem>Pepperoni - 2,80£</asp:ListItem>
-            </asp:RadioButtonList>
-        </div>
-        <asp:Button ID="AddButton" runat="server" OnClick="AddButton_Click" Text="Add to order" />
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
         <br />
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Pizza" DataSourceID="SqlDataSource1" Height="83px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1" Width="200px">
-            <Columns>
-                <asp:BoundField DataField="Pizza" HeaderText="Pizza" ReadOnly="True" SortExpression="Pizza" />
-                <asp:BoundField DataField="Price" HeaderText="Price" SortExpression="Price" />
-            </Columns>
-        </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [Pizza], [Price] FROM [Order]"></asp:SqlDataSource>
         <br />
-        <asp:Button ID="CheckoutButton" runat="server" Text="Checkout" OnClick="CheckoutButton_Click" />
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="Button" />
+        <br />
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnPageIndexChanging="GridView1_PageIndexChanging" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDeleting="GridView1_RowDeleting">  
+                    <Columns>  
+                        <asp:BoundField DataField="OrderID" HeaderText="OrderID" Visible="False" />  
+                        <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" Visible="False" />  
+                        <asp:BoundField DataField="Pizza" HeaderText="Pizza" />  
+                        <asp:BoundField DataField="Price" HeaderText="Price" />  
+                        <asp:BoundField DataField="Date" HeaderText="Date" />
+                        <asp:CommandField ShowDeleteButton="true" /> </Columns>  
+                </asp:GridView>
+        Price:
+        <asp:Label ID="Price" runat="server"></asp:Label>
+        <br />
+        <br />
+        <br />
+        <p>
+            &nbsp;</p>
     </form>
 </body>
 </html>
