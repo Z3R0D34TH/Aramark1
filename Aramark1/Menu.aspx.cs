@@ -100,5 +100,9 @@ namespace Aramark1
             gvbind();
         }
 
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
