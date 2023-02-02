@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate" VisibleWhenLoggedIn="False" Height="177px" Width="319px">
+            <asp:Login ID="Login1" runat="server" OnAuthenticate="Login1_Authenticate" VisibleWhenLoggedIn="False" Height="177px" Width="319px" UserNameLabelText="Username:">
             </asp:Login>
         </div>
     </form>

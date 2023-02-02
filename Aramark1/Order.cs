@@ -17,8 +17,9 @@ namespace Aramark1
         public int OrderID { get; set; }
         public int CustomerID { get; set; }
         public string Pizza { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         public System.DateTime Date { get; set; }
+        public string Placed { get; set; }
     
         public virtual Users Users { get; set; }
     }

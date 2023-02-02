@@ -12,8 +12,9 @@
           <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="Pizza" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Placed" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -23,7 +24,7 @@
           <Property Name="uname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pass" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Users_ToOrder">
+        <Association Name="FK_Order_ToUsers">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -38,7 +39,7 @@
         <EntityContainer Name="AramarkDBModelStoreContainer">
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Users_ToOrder" Association="Self.FK_Users_ToOrder">
+          <AssociationSet Name="FK_Order_ToUsers" Association="Self.FK_Order_ToUsers">
             <End Role="Users" EntitySet="Users" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
@@ -50,7 +51,7 @@
         <EntityContainer Name="AramarkDBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Order" EntityType="AramarkDBModel.Order" />
           <EntitySet Name="Users" EntityType="AramarkDBModel.Users" />
-          <AssociationSet Name="FK_Users_ToOrder" Association="AramarkDBModel.FK_Users_ToOrder">
+          <AssociationSet Name="FK_Order_ToUsers" Association="AramarkDBModel.FK_Order_ToUsers">
             <End Role="Users" EntitySet="Users" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
@@ -62,9 +63,10 @@
           <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerID" Type="Int32" Nullable="false" />
           <Property Name="Pizza" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Price" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Users" Relationship="AramarkDBModel.FK_Users_ToOrder" FromRole="Order" ToRole="Users" />
+          <Property Name="Placed" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="AramarkDBModel.FK_Order_ToUsers" FromRole="Order" ToRole="Users" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -73,9 +75,9 @@
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="uname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Order" Relationship="AramarkDBModel.FK_Users_ToOrder" FromRole="Users" ToRole="Order" />
+          <NavigationProperty Name="Order" Relationship="AramarkDBModel.FK_Order_ToUsers" FromRole="Users" ToRole="Order" />
         </EntityType>
-        <Association Name="FK_Users_ToOrder">
+        <Association Name="FK_Order_ToUsers">
           <End Type="AramarkDBModel.Users" Role="Users" Multiplicity="1" />
           <End Type="AramarkDBModel.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -96,6 +98,7 @@
           <EntitySetMapping Name="Order">
             <EntityTypeMapping TypeName="AramarkDBModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Placed" ColumnName="Placed" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Pizza" ColumnName="Pizza" />

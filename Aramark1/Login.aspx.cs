@@ -40,6 +40,7 @@ namespace Aramark1
             bool status;
             String uname;
             String pass;
+            String CustID;
 
 
             SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\AramarkDB.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
@@ -48,13 +49,14 @@ namespace Aramark1
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             sda.Fill(ds);
-            arrays.cusid = ds.Tables[0].Rows[0]["CustomerID"].ToString();
+            CustID = ds.Tables[0].Rows[0]["CustomerID"].ToString();
             uname = ds.Tables[0].Rows[0]["uname"].ToString();
             pass = ds.Tables[0].Rows[0]["pass"].ToString();
             
             if (uname == username && pass == password)
             {
                 Session["username"] = uname;
+                Session["CustomerID"] = CustID;
                 status = true;
             }
             else
