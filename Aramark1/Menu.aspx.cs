@@ -27,6 +27,8 @@ namespace Aramark1
             
             gvbind();
 
+            
+
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -44,7 +46,7 @@ namespace Aramark1
                 pizza.CustomerID = int.Parse(Session["CustomerID"].ToString());
                 pizza.Pizza = "Margarita";
                 pizza.Price = 2.60;
-                pizza.Date = DateTime.Now.Date;
+                pizza.Date = DateTime.Today;
                 pizza.Placed = "No";
 
             }
@@ -53,7 +55,7 @@ namespace Aramark1
                 pizza.CustomerID = int.Parse(Session["CustomerID"].ToString());
                 pizza.Pizza = "Pepperoni";
                 pizza.Price = 2.80;
-                pizza.Date = DateTime.Now.Date;
+                pizza.Date = DateTime.Today;
                 pizza.Placed = "No";
             }
             db.Order.Add(pizza);
@@ -65,7 +67,7 @@ namespace Aramark1
         {
             SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\AramarkDB.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [Order] where CustomerID='" + Session["CustomerID"] + "'AND Date='" + DateTime.Now.Date + "'", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM[Order] where CustomerID = '" + Session["CustomerID"] + "'AND Placed='No'", conn);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             sda.Fill(ds);
@@ -93,11 +95,12 @@ namespace Aramark1
         protected void gvbind()
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand("Select * from [Order]", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [Order] where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
             conn.Close();
+            Label2.Text = Session["CustomerID"].ToString();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 GridView1.DataSource = ds;

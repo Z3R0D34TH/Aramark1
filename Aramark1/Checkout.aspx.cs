@@ -15,7 +15,19 @@ namespace Aramark1
         private SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\AramarkDB.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
         protected void Page_Load(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [Order] where CustomerID='" + Session["CustomerID"] + "'AND Date='" + DateTime.Now.Date + "'", conn);
+            if (DropDownList1.SelectedIndex == 0)
+            {
+                CardNumbers.Visible = false;
+                CardCVC.Visible = false;
+                CardExpire.Visible = false;
+                CardHolder.Visible = false;
+                Label1.Visible = false;
+                Label2.Visible = false;
+                Label3.Visible = false;
+                Label4.Visible = false;
+            }
+            Session["CustomerID"] = 1;
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [Order] where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             sda.Fill(ds);
@@ -49,7 +61,7 @@ namespace Aramark1
         protected void gvbind()
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand("Select * from [Order]", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [Order] where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -74,7 +86,43 @@ namespace Aramark1
 
         protected void Endcheckout_Click(object sender, EventArgs e)
         {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE [Order] SET Placed='Yes' where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
             Response.Redirect("PaymentFinished.aspx");
+
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void Refresh_Click(object sender, EventArgs e)
+        {
+            if (DropDownList1.SelectedIndex == 0)
+            {
+                CardNumbers.Visible = false;
+                CardCVC.Visible = false;
+                CardExpire.Visible = false;
+                CardHolder.Visible = false;
+                Label1.Visible = false;
+                Label2.Visible = false;
+                Label3.Visible = false;
+                Label4.Visible = false;
+            }
+            else if (DropDownList1.SelectedIndex == 1)
+            {
+                CardNumbers.Visible = true;
+                CardCVC.Visible = true;
+                CardExpire.Visible = true;
+                CardHolder.Visible = true;
+                Label1.Visible = true;
+                Label2.Visible = true;
+                Label3.Visible = true;
+                Label4.Visible = true;
+            }
         }
     }
 }
