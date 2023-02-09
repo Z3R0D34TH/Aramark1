@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="OrderID" DataSourceID="SqlDataSource1" Height="291px" Width="598px">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="OrderID" DataSourceID="SqlDataSource1" Height="291px" Width="598px" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 <Columns>
                     <asp:BoundField DataField="OrderID" HeaderText="OrderID" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" />
                     <asp:BoundField DataField="CustomerID" HeaderText="CustomerID" SortExpression="CustomerID" />
@@ -18,11 +18,13 @@
                     <asp:BoundField DataField="Date" HeaderText="Date" SortExpression="Date" />
                 </Columns>
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [OrderID], [CustomerID], [Pizza], [Price], [Date] FROM [Order] WHERE ([Placed] = @Placed) ORDER BY [OrderID]">
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [OrderID], [CustomerID], [Pizza], [Price], [Date] FROM [Order] WHERE ([Placed] = @Placed) ORDER BY [CustomerID]">
                 <SelectParameters>
                     <asp:Parameter DefaultValue="Yes" Name="Placed" Type="String" />
                 </SelectParameters>
             </asp:SqlDataSource>
+            <asp:Button ID="Back" runat="server" Text="Go back" OnClick="Back_Click" />
+            <br />
         </div>
     </form>
 </body>

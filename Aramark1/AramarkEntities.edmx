@@ -23,6 +23,7 @@
           <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="uname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="pass" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Admin" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <Association Name="FK_Order_ToUsers">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
@@ -75,6 +76,7 @@
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="uname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="pass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Admin" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Order" Relationship="AramarkDBModel.FK_Order_ToUsers" FromRole="Users" ToRole="Order" />
         </EntityType>
         <Association Name="FK_Order_ToUsers">
@@ -110,6 +112,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AramarkDBModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Admin" ColumnName="Admin" />
                 <ScalarProperty Name="pass" ColumnName="pass" />
                 <ScalarProperty Name="uname" ColumnName="uname" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />

@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="67f716672cfb4eea87d60e0296703140" Name="Diagram1" ShowGrid="false">
         <EntityTypeShape EntityType="AramarkDBModel.Order" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="AramarkDBModel.Users" Width="1.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="AramarkDBModel.Users" Width="1.5" PointX="0.75" PointY="1.125" />
         <AssociationConnector Association="AramarkDBModel.FK_Order_ToUsers" />
       </Diagram>
     </edmx:Diagrams>

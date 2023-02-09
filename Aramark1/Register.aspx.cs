@@ -29,6 +29,7 @@ namespace Aramark1
                 var user = new Users();
                 user.uname = Uname.Text;
                 user.pass = Pass.Text;
+                user.Admin = "No";
                 db.Users.Add(user);
                 db.SaveChanges();
                 Response.Redirect("Login.aspx");
@@ -38,5 +39,6 @@ namespace Aramark1
                 Label1.Text = "Your passwords does not match";
             }
         }
+
     }
 }

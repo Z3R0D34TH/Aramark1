@@ -15,18 +15,24 @@ namespace Aramark1
         private SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\AramarkDB.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (DropDownList1.SelectedIndex == 0)
+            if (Session["username"] != null)
             {
-                CardNumbers.Visible = false;
-                CardCVC.Visible = false;
-                CardExpire.Visible = false;
-                CardHolder.Visible = false;
-                Label1.Visible = false;
-                Label2.Visible = false;
-                Label3.Visible = false;
-                Label4.Visible = false;
+
             }
-            Session["CustomerID"] = 1;
+            else
+            {
+                Response.Redirect("Register.aspx");
+            }
+            CardNumbers.Visible = false;
+            CardCVC.Visible = false;
+            CardExpire.Visible = false;
+            CardHolder.Visible = false;
+            Label1.Visible = false;
+            Label2.Visible = false;
+            Label3.Visible = false;
+            Label4.Visible = false;
+            SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\AramarkDB.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
+
             SqlCommand cmd = new SqlCommand("SELECT * FROM [Order] where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
@@ -44,7 +50,7 @@ namespace Aramark1
         }
         protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            if (GridView1.SelectedRow == null)
+            if (GridView.SelectedRow == null)
             {
                 Label2.Text = "Please select a row before you delete it";
             }
@@ -52,7 +58,7 @@ namespace Aramark1
             {
                 Label2.Text = "";
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("DELETE FROM [Order] where OrderID='" + GridView1.DataKeys[GridView1.SelectedIndex]["OrderID"].ToString() + "'", conn);
+                SqlCommand cmd = new SqlCommand("DELETE FROM [Order] where OrderID='" + GridView.DataKeys[GridView.SelectedIndex]["OrderID"].ToString() + "'", conn);
                 cmd.ExecuteNonQuery();
                 conn.Close();
                 gvbind();
@@ -68,30 +74,46 @@ namespace Aramark1
             conn.Close();
             if (ds.Tables[0].Rows.Count > 0)
             {
-                GridView1.DataSource = ds;
-                GridView1.DataBind();
+                GridView.DataSource = ds;
+                GridView.DataBind();
             }
             else
             {
                 ds.Tables[0].Rows.Add(ds.Tables[0].NewRow());
-                GridView1.DataSource = ds;
-                GridView1.DataBind();
-                int columncount = GridView1.Rows[0].Cells.Count;
-                GridView1.Rows[0].Cells.Clear();
-                GridView1.Rows[0].Cells.Add(new TableCell());
-                GridView1.Rows[0].Cells[0].ColumnSpan = columncount;
-                GridView1.Rows[0].Cells[0].Text = "You have not added anything to the list today";
+                GridView.DataSource = ds;
+                GridView.DataBind();
+                int columncount = GridView.Rows[0].Cells.Count;
+                GridView.Rows[0].Cells.Clear();
+                GridView.Rows[0].Cells.Add(new TableCell());
+                GridView.Rows[0].Cells[0].ColumnSpan = columncount;
+                GridView.Rows[0].Cells[0].Text = "You have not added anything to the list today";
             }
         }
 
         protected void Endcheckout_Click(object sender, EventArgs e)
         {
-            conn.Open();
-            SqlCommand cmd = new SqlCommand("UPDATE [Order] SET Placed='Yes' where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            Response.Redirect("PaymentFinished.aspx");
-
+            if (CardNumbers.Visible == true)
+            {
+                if (CardNumbers.Text != null && CardHolder.Text != null && CardExpire.Text != null && CardCVC.Text != null)
+                {
+                    if (CardNumbers.Text.Length <= 18 && CardHolder.Text.Length >= 13 && CardCVC.Text.Length == 3)
+                    {
+                        conn.Open();
+                        SqlCommand cmd = new SqlCommand("UPDATE [Order] SET Placed='Yes' where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                        Response.Redirect("PaymentFinished.aspx");
+                    }
+                    else
+                    {
+                        Errorspaying.Text = "The introduced details are wrong, please check the card and CVC numbers";
+                    }
+                }
+                else
+                {
+                    Errorspaying.Text = "You need to fill the payment details";
+                }
+            }
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)

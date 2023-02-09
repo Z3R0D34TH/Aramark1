@@ -114,13 +114,13 @@ namespace Aramark1
         protected global::System.Web.UI.WebControls.Button Refresh;
 
         /// <summary>
-        /// GridView1 control.
+        /// GridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.GridView GridView;
 
         /// <summary>
         /// PriceLabel control.
@@ -130,6 +130,15 @@ namespace Aramark1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label PriceLabel;
+
+        /// <summary>
+        /// Errorspaying control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Errorspaying;
 
         /// <summary>
         /// Endcheckout control.

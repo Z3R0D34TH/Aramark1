@@ -24,7 +24,14 @@ namespace Aramark1
         {
             if (logear(Login1.UserName, Login1.Password))
             {
-                Response.Redirect("Menu.aspx");
+                if (Session["Admin"].ToString() == "Yes       ")
+                {
+                    Response.Redirect("AdminPage.aspx");
+                }
+                else if (Session["Admin"].ToString() == "No       ")
+                {
+                    Response.Redirect("Menu.aspx");
+                }
             }
             else
             {
@@ -39,6 +46,7 @@ namespace Aramark1
             String CustID;
             String uname;
             String pass;
+            String admin;
             try
             {
                 conn.Open();
@@ -53,9 +61,11 @@ namespace Aramark1
                     CustID = ds.Tables[0].Rows[0]["CustomerID"].ToString();
                     uname = ds.Tables[0].Rows[0]["uname"].ToString();
                     pass = ds.Tables[0].Rows[0]["pass"].ToString();
+                    admin = ds.Tables[0].Rows[0]["Admin"].ToString();
                     status = true;
                     Session["CustomerID"] = CustID;
                     Session["username"] = uname;
+                    Session["Admin"] = admin;
                 }
                 else
                 {

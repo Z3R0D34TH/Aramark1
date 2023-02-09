@@ -26,10 +26,9 @@ namespace Aramark1
             {
                 Response.Redirect("Register.aspx");
             }
+            lol();
             gvbind();
-
             
-
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,7 +67,7 @@ namespace Aramark1
         {
             SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\AramarkDB.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM[Order] where CustomerID = '" + Session["CustomerID"] + "'AND Placed='No'", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [Order] where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             sda.Fill(ds);
@@ -122,7 +121,7 @@ namespace Aramark1
         public void Delete()
         {
             conn.Open();
-            SqlCommand cmd = new SqlCommand("DELETE FROM [Order] where CustomerID='" + Session["CustomerID"] + "'Placed='No'", conn);
+            SqlCommand cmd = new SqlCommand("DELETE FROM [Order] where CustomerID='" + Session["CustomerID"] + "' AND Placed='No'", conn);
             cmd.ExecuteNonQuery();
             conn.Close();
             gvbind();
@@ -132,10 +131,32 @@ namespace Aramark1
         {
             Response.Redirect("Checkout.aspx");
         }
-
-        protected void Timer1_Tick(object sender, EventArgs e)
+        protected void lol()
         {
-            Delete();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [Order] where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            conn.Close();
+            String date = null;
+            try
+            {
+                date = dt.Rows[dt.Rows.Count]["Date"].ToString();
+            }
+            catch
+            {
+
+            }
+            if (date != null)
+            {
+                int result = DateTime.Compare(DateTime.Now, DateTime.Parse(date));
+                if (result > 0)
+                {
+                    Delete();
+                }
+            }
         }
+
     }
 }
