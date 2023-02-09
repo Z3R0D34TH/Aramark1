@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AllOrders.aspx" />
     <Content Include="App_Data\AramarkDB.mdf" />
     <Content Include="App_Data\AramarkDB_log.ldf" />
     <Content Include="AramarkEntities.Context.tt">
@@ -96,6 +97,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllOrders.aspx.cs">
+      <DependentUpon>AllOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllOrders.aspx.designer.cs">
+      <DependentUpon>AllOrders.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AramarkEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,6 +131,7 @@
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>

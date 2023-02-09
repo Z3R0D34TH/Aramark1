@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ using System.Data.SqlClient;
 
 namespace Aramark1
 {
+
     public partial class Menu : System.Web.UI.Page
     {
         private SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\AramarkDB.mdf;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework");
@@ -24,7 +26,6 @@ namespace Aramark1
             {
                 Response.Redirect("Register.aspx");
             }
-            
             gvbind();
 
             
@@ -92,6 +93,7 @@ namespace Aramark1
                 gvbind();
             }
         }
+        
         protected void gvbind()
         {
             conn.Open();
@@ -100,7 +102,6 @@ namespace Aramark1
             DataSet ds = new DataSet();
             da.Fill(ds);
             conn.Close();
-            Label2.Text = Session["CustomerID"].ToString();
             if (ds.Tables[0].Rows.Count > 0)
             {
                 GridView1.DataSource = ds;
@@ -118,10 +119,23 @@ namespace Aramark1
                 GridView1.Rows[0].Cells[0].Text = "You have not added anything to the list today";
             }
         }
+        public void Delete()
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("DELETE FROM [Order] where CustomerID='" + Session["CustomerID"] + "'Placed='No'", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            gvbind();
+        }
 
         protected void Checkout_Click(object sender, EventArgs e)
         {
             Response.Redirect("Checkout.aspx");
+        }
+
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            Delete();
         }
     }
 }

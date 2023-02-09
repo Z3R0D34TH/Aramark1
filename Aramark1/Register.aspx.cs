@@ -19,5 +19,24 @@ namespace Aramark1
         {
             Response.Redirect("Login.aspx");
         }
+
+        protected void Register1_Click(object sender, EventArgs e)
+        {
+            if (Pass.Text == Confirmpass.Text)
+            {
+                Label1.Text = "";
+                AramarkDBEntities1 db = new AramarkDBEntities1();
+                var user = new Users();
+                user.uname = Uname.Text;
+                user.pass = Pass.Text;
+                db.Users.Add(user);
+                db.SaveChanges();
+                Response.Redirect("Login.aspx");
+            }
+            else
+            {
+                Label1.Text = "Your passwords does not match";
+            }
+        }
     }
 }

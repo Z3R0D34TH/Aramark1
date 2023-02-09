@@ -36,7 +36,11 @@
         <br />
         <br />
         <p>
-            &nbsp;</p>
+            <asp:Timer ID="Timer1" runat="server" Interval="2400000" OnTick="Timer1_Tick">
+            </asp:Timer>
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+        </p>
     </form>
 </body>
 </html>

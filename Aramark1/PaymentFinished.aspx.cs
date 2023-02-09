@@ -13,5 +13,10 @@ namespace Aramark1
         {
 
         }
+
+        protected void Menu_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Menu.aspx");
+        }
     }
 }
