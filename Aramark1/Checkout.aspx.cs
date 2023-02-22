@@ -92,28 +92,11 @@ namespace Aramark1
 
         protected void Endcheckout_Click(object sender, EventArgs e)
         {
-            if (CardNumbers.Visible == true)
-            {
-                if (CardNumbers.Text != null && CardHolder.Text != null && CardExpire.Text != null && CardCVC.Text != null)
-                {
-                    if (CardNumbers.Text.Length <= 18 && CardHolder.Text.Length >= 13 && CardCVC.Text.Length == 3)
-                    {
-                        conn.Open();
-                        SqlCommand cmd = new SqlCommand("UPDATE [Order] SET Placed='Yes' where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
-                        Response.Redirect("PaymentFinished.aspx");
-                    }
-                    else
-                    {
-                        Errorspaying.Text = "The introduced details are wrong, please check the card and CVC numbers";
-                    }
-                }
-                else
-                {
-                    Errorspaying.Text = "You need to fill the payment details";
-                }
-            }
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE [Order] SET Placed='Yes' where CustomerID='" + Session["CustomerID"] + "'AND Placed='No'", conn);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            Response.Redirect("PaymentFinished.aspx");
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
